@@ -1,0 +1,5 @@
+[deps]
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
+QuartzImageIO = "dca85d43-d64c-5e67-8c65-017450d5d020"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
