@@ -9,6 +9,7 @@ Since the use of dichroic mirrors blocked the detection of emitted light near 40
 
 ## Fluorescent Labels
 Seven fluorescent labels were used in this data.
+
 | Dye Name | Excitation Max. | Emission Max. | Source |
 |----------|-----------------|---------------|--------|
 | DY-415 | 418nm | 467nm | Dyomics GmbH |
