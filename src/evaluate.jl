@@ -7,8 +7,15 @@ using LinearAlgebra
 
 export run
 
-function rmse(error)
-    return sqrt(mean(error.^2))
+function rre(Y,Y_hat)
+    mse = mean(sum((Y-Y_hat).^2,dims=1))
+    return mse/mean(sum(Y.^2,dims=1))
+end
+
+function prop_ind(W)
+    WW = W*transpose(W)
+    D = diagm(0=>dropdims(sum(W.^2,dims=2),dims=2))
+    return sqrt(sum((WW - D).^2))/sqrt(sum(D.^2))
 end
 
 function run()
@@ -23,8 +30,8 @@ function run()
                      "Z-TDFH2-1",
                      "Z-TDFH2-2"]
     nimgs = length(exp_filenames)
-    rmse_residual = zeros(Float32,(nimgs,2))
-    rmse_indeterminacy = zeros(Float32,(nimgs,2))
+    reconstruction_error = zeros(Float32,(nimgs,2))
+    proportion_indeterminacy = zeros(Float32,(nimgs,2))
 
     # evaluate
     S_nls = readdlm(joinpath("..","results","mean-estimated-endmembers.csv"), ',', Float32)
@@ -42,8 +49,8 @@ function run()
         N = size(img,3)
         W = transpose(reshape(img,(P,N)))
         Y_hat = S_nls*W
-        rmse_residual[i,1] = rmse(Y_hat - Y)
-        rmse_indeterminacy[i,1] = rmse((W*transpose(W)) - diagm(0=>dropdims(sum(W.^2,dims=2),dims=2)))
+        reconstruction_error[i,1] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,1] = prop_ind(W)
 
         # evaluate SANMF
         S_sanmf = readdlm(joinpath("..","results","sanmf",string(exp_filenames[i],"-sanmf-S.csv")), ',', Float32)
@@ -53,13 +60,13 @@ function run()
         N = size(img,3)
         W = transpose(reshape(img,(P,N)))
         Y_hat = S_sanmf*W .+ b
-        rmse_residual[i,2] = rmse(Y_hat - Y)
-        rmse_indeterminacy[i,2] = rmse((W*transpose(W)) - diagm(0=>dropdims(sum(W.^2,dims=2),dims=2)))
+        reconstruction_error[i,2] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,2] = prop_ind(W)
 
     end
 
-    writedlm(joinpath("..","results","rmse_residual.csv"), rmse_residual, ",")
-    writedlm(joinpath("..","results","rmse_indeterminacy.csv"), rmse_indeterminacy, ",")
+    writedlm(joinpath("..","results","reconstruction-error.csv"), reconstruction_error, ",")
+    writedlm(joinpath("..","results","proportion-indeterminacy.csv"), proportion_indeterminacy, ",")
 end
 
 end  # module Evaluate
