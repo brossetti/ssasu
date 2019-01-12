@@ -1,11 +1,11 @@
-module SSU
+module SSASU
 
 using Images
 using DelimitedFiles
 
 export run
 
-function sanmf(S, Y, free::Array{Int,1}; γ::Float32=0.0f0, maxiter::Int=1000,
+function ssasu(S, Y, free::Array{Int,1}; γ::Float32=0.0f0, maxiter::Int=1000,
                tol::Float32=1f-4, ϵ::Float32=eps(Float32), verbose::Bool=true)
     M,P = size(Y)
     N = size(S,2)
@@ -62,7 +62,6 @@ function sanmf(S, Y, free::Array{Int,1}; γ::Float32=0.0f0, maxiter::Int=1000,
 end
 
 function run(S)
-    # exp_filenames = ["Z-TDFH2-2.tif"]
     exp_filenames = ["E-TDFH2-1.tif",
                      "E-TDFH2-2.tif",
                      "F-TDFH2-1.tif",
@@ -75,7 +74,7 @@ function run(S)
                      "Z-TDFH2-2.tif"]
     N = size(S,2)
 
-    println("Running SANMF...")
+    println("Running SSASU...")
     for i = 1:length(exp_filenames)
         # load image
         exp_filename = joinpath("..","data","test",exp_filenames[i])
@@ -86,16 +85,16 @@ function run(S)
 
         # optimization
         S[:,1] = rand(M,1)
-        S_e, W, b, err = sanmf(S,Y,[1]; γ=0.009f0, tol=1f-4, verbose=true)
+        S_e, W, b, err = ssasu(S,Y,[1]; γ=0.009f0, tol=1f-4, verbose=true)
 
         # save results
         filename = splitext(exp_filenames[i])[1]
-        spectra_filename = joinpath("..","results","sanmf",
-                            string(filename,"-sanmf-S.csv"))
-        bgnd_filename = joinpath("..","results","sanmf",
-                            string(filename,"-sanmf-b.csv"))
-        unmixed_filename = joinpath("..","results","sanmf",
-                            string(filename,"-sanmf.tif"))
+        spectra_filename = joinpath("..","results","ssasu",
+                            string(filename,"-ssasu-S.csv"))
+        bgnd_filename = joinpath("..","results","ssasu",
+                            string(filename,"-ssasu-b.csv"))
+        unmixed_filename = joinpath("..","results","ssasu",
+                            string(filename,"-ssasu.tif"))
         writedlm(spectra_filename, S_e, ",")
         writedlm(bgnd_filename, b, ",")
         save(unmixed_filename, Gray.(reshape(transpose(map(clamp01,W)),(py,px,N))))
@@ -116,4 +115,4 @@ function run()
     return run(S)
 end
 
-end  # module SSU
+end  # module SSASU
