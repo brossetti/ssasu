@@ -35,8 +35,8 @@ function run()
                      "Z-TDFH2-1",
                      "Z-TDFH2-2"]
     nimgs = length(exp_filenames)
-    reconstruction_error = zeros(Float32,(nimgs,2))
-    proportion_indeterminacy = zeros(Float32,(nimgs,2))
+    reconstruction_error = zeros(Float32,(nimgs,3))
+    proportion_indeterminacy = zeros(Float32,(nimgs,3))
 
     # evaluate unmixing
     S_nls = readdlm(joinpath("..","results","mean-estimated-endmembers.csv"), ',', Float32)
@@ -57,6 +57,18 @@ function run()
         reconstruction_error[i,1] = rre(Y,Y_hat)
         proportion_indeterminacy[i,1] = prop_ind(W)
 
+        # evaluate PoissonNMF
+        S_pnmf = readdlm(joinpath("..","results","poissonnmf",string(exp_filenames[i],"-pnmf-S.csv")), ',', Float32)
+        unmixed_filename = joinpath("..","results","poissonnmf",string(exp_filenames[i], "-pnmf.nnrd"))
+        img = convert(Array{Float32},load(unmixed_filename))
+        N = size(img,3)
+        W = transpose(reshape(img,(P,N)))
+        S_pnmf = S_pnmf.*6.8f0 # undo division by 6.8 from saving spectra in PoissonNMF
+        W = W./2^16 # properly scale weights to original image
+        Y_hat = S_pnmf*W
+        reconstruction_error[i,2] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,2] = prop_ind(W)
+
         # evaluate SSASU
         S_ssasu = readdlm(joinpath("..","results","ssasu",string(exp_filenames[i],"-ssasu-S.csv")), ',', Float32)
         b = readdlm(joinpath("..","results","ssasu",string(exp_filenames[i],"-ssasu-b.csv")), ',', Float32)
@@ -65,8 +77,8 @@ function run()
         N = size(img,3)
         W = transpose(reshape(img,(P,N)))
         Y_hat = S_ssasu*W .+ b
-        reconstruction_error[i,2] = rre(Y,Y_hat)
-        proportion_indeterminacy[i,2] = prop_ind(W)
+        reconstruction_error[i,3] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,3] = prop_ind(W)
     end
 
     writedlm(joinpath("..","results","reconstruction-error.csv"), reconstruction_error, ",")
