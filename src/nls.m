@@ -2,9 +2,9 @@
 
 % load endmember data from CSV
 try
-    S = csvread(fullfile("..","results","estimated-endmembers.csv"));
+    S = csvread(fullfile("..","results","anmf-estimated-endmembers.csv"));
 catch
-    error("No estimated-endmembers.csv file found");
+    error("No anmf-estimated-endmembers.csv file found");
 end
 
 % test images
