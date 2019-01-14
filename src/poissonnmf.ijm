@@ -1,0 +1,1 @@
+run("PoissonNMF ", "number=8 _number=500 subsamples=3 segregation=6 saturation=65535 _background=0 _background_0=flat uniform=1 dye_1=Autofluor.emn dye_2=DY-415.emn dye_3=DY-490.emn dye_4=ATTO_520.emn dye_5=ATTO_550.emn dye_6=TRX.emn dye_7=ATTO_620.emn dye_8=ATTO_655.emn dye_0 dye_9 dye_10 dye_11 dye_12 dye_13 dye_14");
