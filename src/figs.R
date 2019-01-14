@@ -29,8 +29,8 @@ S.anmf.na <- melt(S.anmf[,-1],  id.vars = 'Wavelength', variable.name = 'Endmemb
 
 plt.S <- ggplot() +
                 geom_ribbon(data=S.true,aes(x=Wavelength, ymin=0, ymax=value, fill=Endmember), color="black", alpha=0.2) +
-                geom_line(data=S.mean.na,aes(x=Wavelength, y=value, color=Endmember), linetype="dotted") + 
-                geom_line(data=S.anmf.na,aes(x=Wavelength, y=value, color=Endmember), linetype="longdash") +
+                geom_line(data=S.mean.na,aes(x=Wavelength, y=value, color=Endmember), linetype="dotted",show.legend=FALSE) + 
+                geom_line(data=S.anmf.na,aes(x=Wavelength, y=value, color=Endmember), linetype="longdash",show.legend=FALSE) +
                 geom_vline(xintercept=c(488,561,633), color="gray") +
                 ylab("Intensity") + labs(fill="") + 
                 theme_few()
@@ -65,8 +65,8 @@ ggsave(file.path("..","results","autofluor.jpg"), plot=plt.AF, width=11, height=
 RE <- read.csv(file.path("..","results","reconstruction-error.csv"), header = FALSE)
 PI <- read.csv(file.path("..","results","proportion-indeterminacy.csv"), header = FALSE)
 
-colnames(RE) <- c("NLS","SSASU")
-colnames(PI) <- c("NLS","SSASU")
+colnames(RE) <- c("NLS","PoissonNMF","SSASU")
+colnames(PI) <- c("NLS","PoissonNMF","SSASU")
 RE$TestImage <- test.image.names
 PI$TestImage <- test.image.names
 
@@ -74,11 +74,11 @@ RE <- melt(RE,  id.vars = 'TestImage', variable.name = 'Method')
 PI <- melt(PI,  id.vars = 'TestImage', variable.name = 'Method')
 
 plt.RE <- ggplot(data=RE, aes(x=TestImage, y=value, fill=Method)) +
-                 geom_col(position="dodge") +
+                 geom_col(position="dodge", color="black") +
                  ylab("Reconstruction Error") + xlab("Test Image") + labs(fill="") +
                  theme_few()
 plt.PI <- ggplot(data=PI, aes(x=TestImage, y=value, fill=Method)) +
-                 geom_col(position="dodge") +
+                 geom_col(position="dodge", color="black") +
                  ylab("Proportion Indeterminacy") + xlab("Test Image") + labs(fill="") +
                  theme_few()
 ggsave(file.path("..","results","reconstruction-error.jpg"), plot=plt.RE, width=10, height=8, dpi=350)
