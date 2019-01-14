@@ -59,7 +59,7 @@ function run()
 
         # evaluate PoissonNMF
         S_pnmf = readdlm(joinpath("..","results","poissonnmf",string(exp_filenames[i],"-pnmf-S.csv")), ',', Float32)
-        unmixed_filename = joinpath("..","results","poissonnmf",string(exp_filenames[i], "-pnmf.nnrd"))
+        unmixed_filename = joinpath("..","results","poissonnmf",string(exp_filenames[i], "-pnmf.nrrd"))
         img = convert(Array{Float32},load(unmixed_filename))
         N = size(img,3)
         W = transpose(reshape(img,(P,N)))
