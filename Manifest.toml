@@ -31,6 +31,18 @@ git-tree-sha1 = "055eb2690182ebc31087859c3dd8598371d3ef9e"
 uuid = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
 version = "0.5.3"
 
+[[BufferedStreams]]
+deps = ["Compat", "Test"]
+git-tree-sha1 = "5d55b9486590fdda5905c275bb21ce1f0754020f"
+uuid = "e1450e63-4bb3-523b-b2a4-4ffa8c0fd77d"
+version = "1.0.0"
+
+[[Calculus]]
+deps = ["Compat"]
+git-tree-sha1 = "f60954495a7afcee4136f78d1d60350abd37a409"
+uuid = "49dc2e85-a5d0-5ad3-a950-438e2897f1b9"
+version = "0.4.1"
+
 [[CatIndices]]
 deps = ["CustomUnitRanges", "OffsetArrays", "Test"]
 git-tree-sha1 = "254cf73ea369d2e39bfd6c5eb27a2296cfaed68c"
@@ -109,6 +121,12 @@ version = "0.7.4"
 deps = ["LinearAlgebra", "Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
+[[DualNumbers]]
+deps = ["Calculus", "LinearAlgebra", "NaNMath", "SpecialFunctions", "Test"]
+git-tree-sha1 = "b1e66ac804402a32184288ec9a78ab6d3a22ae69"
+uuid = "fa6b7ba4-c1ee-5f82-b5fc-ecf0adba8f74"
+version = "0.6.1"
+
 [[FFTViews]]
 deps = ["CustomUnitRanges", "FFTW", "Test"]
 git-tree-sha1 = "9d7993227ca7c0fdb6b31deef193adbba11c8f4e"
@@ -123,9 +141,9 @@ version = "0.2.4"
 
 [[FileIO]]
 deps = ["Pkg", "Random", "Test"]
-git-tree-sha1 = "1a114d08094e7267ba8d4d684f930d5a722184de"
+git-tree-sha1 = "c94b0787956629036fb2b20fccde9e52b89d079a"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.0.4"
+version = "1.0.5"
 
 [[FixedPointNumbers]]
 deps = ["Test"]
@@ -239,6 +257,12 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
+[[Libz]]
+deps = ["BufferedStreams", "Random", "Test"]
+git-tree-sha1 = "d405194ffc0293c3519d4f7251ce51baac9cc871"
+uuid = "2ec943e9-cfe8-584d-b93d-64dcb6d567b7"
+version = "1.0.0"
+
 [[LinearAlgebra]]
 deps = ["Libdl"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
@@ -270,6 +294,12 @@ version = "0.3.1"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
+
+[[NRRD]]
+deps = ["AxisArrays", "ColorVectorSpace", "Colors", "FileIO", "FixedPointNumbers", "ImageAxes", "ImageCore", "Libz", "MappedArrays", "Mmap", "Printf", "Quaternions", "StaticArrays", "Statistics", "Test", "Unitful"]
+git-tree-sha1 = "4a93bed631697c5fba978ecfc66f2d8c564ea280"
+uuid = "9bb6cfbd-7763-5393-b1b5-1c8e09872146"
+version = "0.5.0"
 
 [[NaNMath]]
 deps = ["Compat"]
@@ -314,6 +344,12 @@ deps = ["ColorTypes", "ColorVectorSpace", "FileIO", "FixedPointNumbers", "ImageC
 git-tree-sha1 = "33dccde77cddfbbf3fe9dbf3b92d2459260368fa"
 uuid = "dca85d43-d64c-5e67-8c65-017450d5d020"
 version = "0.5.2"
+
+[[Quaternions]]
+deps = ["Compat", "DualNumbers"]
+git-tree-sha1 = "9ab39a818c92452f6b58d1ce88ea54cb7e038e7c"
+uuid = "94ee1d12-ae83-5a48-8b1c-48b8ff168ae0"
+version = "0.3.1"
 
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
@@ -438,6 +474,12 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+
+[[Unitful]]
+deps = ["LinearAlgebra", "Random", "Test"]
+git-tree-sha1 = "ba654182cad07cd6c1f3ae969475e556db3283ea"
+uuid = "1986cc42-f94f-5a68-af5c-568840ba703d"
+version = "0.14.0"
 
 [[VersionParsing]]
 deps = ["Compat"]
