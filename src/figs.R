@@ -29,11 +29,12 @@ S.anmf.na <- melt(S.anmf[,-1],  id.vars = 'Wavelength', variable.name = 'Endmemb
 
 plt.S <- ggplot() +
                 geom_ribbon(data=S.true,aes(x=Wavelength, ymin=0, ymax=value, fill=Endmember), color="black", alpha=0.2) +
-                geom_line(data=S.mean.na,aes(x=Wavelength, y=value, color=Endmember), linetype="dotted",show.legend=FALSE) + 
+                geom_line(data=S.mean.na,aes(x=Wavelength, y=value, color=Endmember), linetype="dotted",show.legend=FALSE) +
                 geom_line(data=S.anmf.na,aes(x=Wavelength, y=value, color=Endmember), linetype="longdash",show.legend=FALSE) +
                 geom_vline(xintercept=c(488,561,633), color="gray") +
-                ylab("Intensity") + labs(fill="") + 
-                theme_few()
+                ylab("Intensity") + labs(fill="") + scale_fill_hue(h.start=90, direction=-1) +
+                scale_color_hue(h.start=90, direction=-1) + theme_few()
+ggsave(file.path("..","results","endmembers.tiff"), plot=plt.S, width=11, height=7, dpi=350)
 ggsave(file.path("..","results","endmembers.jpg"), plot=plt.S, width=11, height=7, dpi=350)
 
 ##### Autofluorescence Plot
@@ -53,7 +54,7 @@ AF <- melt(data.frame(AF),  id.vars = 'Wavelength', variable.name = 'TestImage')
 
 plt.AF <- ggplot() +
                 geom_ribbon(data=S.mean.af,aes(x=Wavelength, ymin=0, ymax=value), color="black", alpha=0.2) +
-                geom_line(data=AF,aes(x=Wavelength, y=value, color=TestImage)) + 
+                geom_line(data=AF,aes(x=Wavelength, y=value, color=TestImage)) +
                 #geom_vline(xintercept=c(488,561,633), color="gray") +
                 ylab("Intensity") + labs(color="") +
                 theme_few()
@@ -76,12 +77,10 @@ PI <- melt(PI,  id.vars = 'TestImage', variable.name = 'Method')
 plt.RE <- ggplot(data=RE, aes(x=TestImage, y=value, fill=Method)) +
                  geom_col(position="dodge", color="black") +
                  ylab("Reconstruction Error") + xlab("Test Image") + labs(fill="") +
-                 theme_few()
+                 theme_few() + theme(legend.position="none")
 plt.PI <- ggplot(data=PI, aes(x=TestImage, y=value, fill=Method)) +
                  geom_col(position="dodge", color="black") +
                  ylab("Proportion Indeterminacy") + xlab("Test Image") + labs(fill="") +
-                 theme_few()
-ggsave(file.path("..","results","reconstruction-error.jpg"), plot=plt.RE, width=10, height=8, dpi=350)
-ggsave(file.path("..","results","proportion-indeterminacy.jpg"), plot=plt.PI, width=10, height=8, dpi=350)
-
-
+                 theme_few() + theme(legend.position = 'bottom')
+ggsave(file.path("..","results","reconstruction-error.jpg"), plot=plt.RE, width=10, height=6, dpi=350)
+ggsave(file.path("..","results","proportion-indeterminacy.jpg"), plot=plt.PI, width=10, height=6, dpi=350)
