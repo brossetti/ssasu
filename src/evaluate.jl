@@ -8,8 +8,8 @@ using LinearAlgebra
 export run
 
 function rre(Y,Y_hat)
-    mse = mean(sum((Y-Y_hat).^2,dims=1))
-    return mse/mean(sum(Y.^2,dims=1))
+    mse = sqrt(sum((Y-Y_hat).^2))
+    return mse/sqrt(sum(Y.^2))
 end
 
 function prop_ind(W)
@@ -67,9 +67,9 @@ function run()
         end
         W = transpose(reshape(img,(P,N)))
         S_pnmf = S_pnmf.*6.8f0 # undo division by 6.8 from saving spectra in PoissonNMF
-        W = W./2^16 # properly scale weights to original image
+        W = (W.-1.0f0)./2^16 # properly scale weights to original image
         Y_hat = S_pnmf*W
-        reconstruction_error[i,2] = rre(Y.-1.0f0,Y_hat)
+        reconstruction_error[i,2] = rre(Y,Y_hat)
         proportion_indeterminacy[i,2] = prop_ind(W)
 
         # evaluate SSASU
