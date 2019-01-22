@@ -62,16 +62,16 @@ function ssasu(S, Y, free::Array{Int,1}; γ::Float32=0.0f0, maxiter::Int=1000,
 end
 
 function run(S)
-    exp_filenames = ["E-TDFH2-1.tif",
-                     "E-TDFH2-2.tif",
-                     "F-TDFH2-1.tif",
-                     "F-TDFH2-2.tif",
-                     "N-TDFH2-1.tif",
-                     "N-TDFH2-2.tif",
-                     "X-TDFH2-1.tif",
-                     "X-TDFH2-2.tif",
-                     "Z-TDFH2-1.tif",
-                     "Z-TDFH2-2.tif"]
+    exp_filenames = ["A-TDFH2-1.tif",
+                     "A-TDFH2-2.tif",
+                     "B-TDFH2-1.tif",
+                     "B-TDFH2-2.tif",
+                     "C-TDFH2-1.tif",
+                     "C-TDFH2-2.tif",
+                     "D-TDFH2-1.tif",
+                     "D-TDFH2-2.tif",
+                     "E-TDFH2-1.tif",
+                     "E-TDFH2-2.tif"]
     N = size(S,2)
 
     println("Running SSASU...")

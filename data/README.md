@@ -34,7 +34,7 @@ Each 16-bit reference image was acquired using dimensions of 512×512 pixels at 
 | TRX.tif | Texas Red-X |
 | AT620.tif | ATTO 620 |
 | AT655.tif | ATTO 655 |
-| X-TDFH2-NC.tif | NA |
+| D-TDFH2-NP.tif | NA |
 
 
 ## Test Images
@@ -42,13 +42,13 @@ Two samples of the tongue dorsum were taken from each of five subjects (E, F, N,
 
 | Probe ID | Taxon | Target | Dye |
 |----------|-------|--------|-----|
-| 556-Smit651-DY415-2 | Species | *Streptococcus mitis* | DY-415 |
-| 560-Ssal372-DY490-2 | Species | *Streptococcus salivarius* | DY-490 |
-| 357-Prv392-AT520-2 | Genus | *Prevotella* | ATTO 520 |
-| 302-Vei488-AT550-1 | Genus | *Veillonella* | ATTO 550 |
-| 550-Act118-TRX-1 | | *Actinomyces* | Texas Red-X |
-| 362-Nei1030-AT620-2 | Family | *Neisseriaceae* | ATTO 620 |
-| 328-Rot491-AT655-2 | Genus | *Rothia* | ATTO 655 |
+| Smit651-DY415-2 | Species | *Streptococcus mitis* | DY-415 |
+| Ssal372-DY490-2 | Species | *Streptococcus salivarius* | DY-490 |
+| Prv392-AT520-2 | Genus | *Prevotella* | ATTO 520 |
+| Vei488-AT550-1 | Genus | *Veillonella* | ATTO 550 |
+| Act118-TRX-1 | | Genus | *Actinomyces* | Texas Red-X |
+| Nei1030-AT620-2 | Family | *Neisseriaceae* | ATTO 620 |
+| Rot491-AT655-2 | Genus | *Rothia* | ATTO 655 |
 
 ## References
-[1] Welch JL, Rossetti BJ, Rieken CW, Dewhirst FE, Borisy GG. Biogeography of a human oral microbiome at the micron scale. Proceedings of the National Academy of Sciences. 2016 Feb 9;113(6):E791-800.
+[1] Mark Welch JL, Rossetti BJ, Rieken CW, Dewhirst FE, Borisy GG. Biogeography of a human oral microbiome at the micron scale. Proceedings of the National Academy of Sciences. 2016 Feb 9;113(6):E791-800.

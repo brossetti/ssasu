@@ -161,7 +161,7 @@ end
 
 function run()
     println("Estimating endmembers from reference images...")
-    ref_filenames = ["X-TDFH2-NC.tif",
+    ref_filenames = ["D-TDFH2-NP.tif",
                      "DY415.tif",
                      "DY490.tif",
                      "AT520.tif",

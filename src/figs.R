@@ -9,7 +9,7 @@ setwd(this.dir)
 # labels
 endmember.names = c("Autofluor","DY-415","DY-490","ATTO 520", "ATTO 550", "TRX", "ATTO 620", "ATTO 655")
 wavelengths = c(415,424,432,441,450,459,468,477,504,513,522,531,540,549,575,584,593,602,611,620,647,656,665,674,682,691)
-test.image.names = c("E1","E2","F1","F2","N1","N2","X1","X2","Z1","Z2")
+test.image.names = c("A1","A2","B1","B2","C1","C2","D1","D2","E1","E2")
 
 ##### Endmember Plot
 # load and plot estimated endmembers
@@ -40,7 +40,7 @@ ggsave(file.path("..","results","endmembers.jpg"), plot=plt.S, width=11, height=
 ##### Autofluorescence Plot
 # load and plot autofluroescence endmembers
 AF <- list()
-for (sample in c("E","F","N","X","Z")) {
+for (sample in c("A","B","C","D","E")) {
   for (fov in c("1","2")) {
     tmp <- read.csv(file.path("..","results","ssasu", paste(sample,"-TDFH2-",fov,"-ssasu-S.csv",sep="")), header = FALSE)
     AF[paste(sample,fov,sep="")] <- tmp[1]

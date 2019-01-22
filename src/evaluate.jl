@@ -24,16 +24,16 @@ function sad(X,Y)
 end
 
 function run()
-    exp_filenames = ["E-TDFH2-1",
-                     "E-TDFH2-2",
-                     "F-TDFH2-1",
-                     "F-TDFH2-2",
-                     "N-TDFH2-1",
-                     "N-TDFH2-2",
-                     "X-TDFH2-1",
-                     "X-TDFH2-2",
-                     "Z-TDFH2-1",
-                     "Z-TDFH2-2"]
+    exp_filenames = ["A-TDFH2-1",
+                     "A-TDFH2-2",
+                     "B-TDFH2-1",
+                     "B-TDFH2-2",
+                     "C-TDFH2-1",
+                     "C-TDFH2-2",
+                     "D-TDFH2-1",
+                     "D-TDFH2-2",
+                     "E-TDFH2-1",
+                     "E-TDFH2-2"]
     nimgs = length(exp_filenames)
     reconstruction_error = zeros(Float32,(nimgs,3))
     proportion_indeterminacy = zeros(Float32,(nimgs,3))
