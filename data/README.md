@@ -1,5 +1,5 @@
 # Spectral Micrographs
-This `test` and `ref` directories contain the testing and reference spectral micrographs, respectively.
+The `test` and `ref` directories contain the testing and reference spectral micrographs, respectively.
 
 ## Microscope Setup
 All spectral micrographs were acquired on a Zeiss LSM 880 using a 63x/1.4NA Plan-Apochromat objective. Point scanning was performed simultaneously for the 405nm, 488nm, 561nm, and 633nm lasers using the 405 and 488/561/633 dichroic mirrors. Each micrograph was generated as the average of 4 consecutive scans.
