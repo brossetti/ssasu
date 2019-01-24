@@ -1,11 +1,11 @@
 # Spectral Micrographs
-This directory contains the testing and reference spectral micrographs within the `test` and `ref` directories, respectively.
+This `test` and `ref` directories contain the testing and reference spectral micrographs, respectively.
 
 ## Microscope Setup
-All spectral micrographs were acquired on a Zeiss LSM 880 using a 63x/1.4NA Plan-Apo objective. Point scanning was performed simultaneously for the 405nm, 488nm, 561nm, and 633nm lasers using the 405 and 488/561/633 dichroic mirrors. Each micrograph was generated as the average of 4 consecutive scans.
+All spectral micrographs were acquired on a Zeiss LSM 880 using a 63x/1.4NA Plan-Apochromat objective. Point scanning was performed simultaneously for the 405nm, 488nm, 561nm, and 633nm lasers using the 405 and 488/561/633 dichroic mirrors. Each micrograph was generated as the average of 4 consecutive scans.
 
 ## Preprocessing
-Since the use of dichroic mirrors blocked the detection of emitted light near 405nm, 488nm, 561nm, and 633nm, each image was preprocessed to remove these dark wavebands. Specifically, wavebands 9, 10, 17, 18, 25, and 26 of the original 32 waveband image were removed.
+Since the use of dichroic mirrors blocked the detection of emitted light near 405nm, 488nm, 561nm, and 633nm, each image was preprocessed by removing the dark spectral bands. Specifically, bands 9, 10, 17, 18, 25, and 26 of the original 32-band image were removed.
 
 ## Fluorescent Labels
 Seven fluorescent labels were used in this data.
@@ -21,7 +21,7 @@ Seven fluorescent labels were used in this data.
 | ATTO 655 | 663nm | 680nm | ATTO-TEC GmbH |
 
 ## Reference Images
-The bacteria *Leptotrichia buccalis* was used as the biological target for generating the reference samples. Fluorescent *in situ* Hybridization was performed separately using a custom oligonucleotide probe (biomers.net GmbH) for each reference sample as described by Mark-Welch *et al.* [1].  A negative control was included by performing the same steps as above on a tongue dorsum sample using water instead of a dye. After hybridization, the labeled reference samples and negative control were mounted on slides as described by Mark-Welch *et al.* [1].
+The bacteria *Leptotrichia buccalis* was used as the biological target for generating reference samples for each of the seven fluorophores: DY-415, DY-490, ATTO 520, ATTO 550, Texas Red-X, ATTO 620, and ATTO 655 (Dyomics GmbH; ATTO-TEC GmbH; Thermo Fisher Scientific Inc.). *L. buccalis* cells were cultured, fixed, and then separately hybridized using custom fluorophore-conjugated oligonucleotide probes (biomers.net GmbH) as described by Mark Welch *et al.* [1]. A tongue biofilm sample was collected from subject D, chemically fixed, and hybridized without a fluorophore to generate a no-probe control sample (used to measure autofluorescence).
 
 Each 16-bit reference image was acquired using dimensions of 512×512 pixels at 0.415μm/pixel resolution.
 
@@ -38,7 +38,7 @@ Each 16-bit reference image was acquired using dimensions of 512×512 pixels at 
 
 
 ## Test Images
-Two samples of the tongue dorsum were taken from each of five subjects (E, F, N, X, and Z). Each sample was labeled with the probe set below and mounted on slides.
+Test samples consisted of biofilms that were collected from the dorsum of the tongue, chemically fixed, and hybridized using a set of probes specific to different taxa of bacteria (see table below). Two samples were taken from each of five human subjects (A-E). 
 
 | Probe ID | Taxon | Target | Dye |
 |----------|-------|--------|-----|
@@ -46,7 +46,7 @@ Two samples of the tongue dorsum were taken from each of five subjects (E, F, N,
 | Ssal372-DY490-2 | Species | *Streptococcus salivarius* | DY-490 |
 | Prv392-AT520-2 | Genus | *Prevotella* | ATTO 520 |
 | Vei488-AT550-1 | Genus | *Veillonella* | ATTO 550 |
-| Act118-TRX-1 | | Genus | *Actinomyces* | Texas Red-X |
+| Act118-TRX-1 | Genus | *Actinomyces* | Texas Red-X |
 | Nei1030-AT620-2 | Family | *Neisseriaceae* | ATTO 620 |
 | Rot491-AT655-2 | Genus | *Rothia* | ATTO 655 |
 
