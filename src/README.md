@@ -1,6 +1,6 @@
 # Source Code
 
-This directory contains all of the source code using to produce the figures in the SSASU manuscript. Below you will find a list of the files and a brief description of their purpose.
+This directory contains all of the source code used to produce the figures in the SSASU manuscript. Below you will find a list of the files and a brief description of their purpose.
 
 #### `estimate-endmembers.jl` - 
 A Julia module that contains functions for estimating endmembers from reference images using either the Mean method or the ANMF method.
