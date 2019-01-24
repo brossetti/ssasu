@@ -8,8 +8,8 @@ using LinearAlgebra
 export run
 
 function rre(Y,Y_hat)
-    mse = sqrt(sum((Y-Y_hat).^2))
-    return mse/sqrt(sum(Y.^2))
+    fnormerr = sqrt(sum((Y-Y_hat).^2))
+    return fnormerr/sqrt(sum(Y.^2))
 end
 
 function prop_ind(W)
