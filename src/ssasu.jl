@@ -13,8 +13,8 @@ function ssasu(S, Y, free::Array{Int,1}; γ::Float32=0.0f0, maxiter::Int=1000,
     # half-wave rectifier
     hwr = (x) -> max(x,ϵ)
 
-    # euclidean cost function
-    cost_fn = (x,x_hat) -> 0.5f0*sqrt(sum((x-x_hat).^2))
+    # squared Frobenius cost function
+    cost_fn = (x,x_hat) -> 0.5f0*sum((x-x_hat).^2)
 
     # initialize
     b = hwr.(rand(M,1))
