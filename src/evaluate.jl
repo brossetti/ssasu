@@ -35,11 +35,11 @@ function run()
                      "E-TDFH2-1",
                      "E-TDFH2-2"]
     nimgs = length(exp_filenames)
-    reconstruction_error = zeros(Float32,(nimgs,3))
-    proportion_indeterminacy = zeros(Float32,(nimgs,3))
+    reconstruction_error = zeros(Float32,(nimgs,5))
+    proportion_indeterminacy = zeros(Float32,(nimgs,5))
 
     # evaluate unmixing
-    S_nls = readdlm(joinpath("..","results","mean-estimated-endmembers.csv"), ',', Float32)
+    S_anmf = readdlm(joinpath("..","results","anmf-estimated-endmembers.csv"), ',', Float32)
     for i = 1:nimgs
         # load original image
         org_filename = joinpath("..","data","test",string(exp_filenames[i], ".tif"))
@@ -53,7 +53,7 @@ function run()
         img = convert(Array{Float32},load(unmixed_filename))
         N = size(img,3)
         W = transpose(reshape(img,(P,N)))
-        Y_hat = S_nls*W
+        Y_hat = S_anmf*W
         reconstruction_error[i,1] = rre(Y,Y_hat)
         proportion_indeterminacy[i,1] = prop_ind(W)
 
@@ -82,6 +82,25 @@ function run()
         Y_hat = S_ssasu*W .+ b
         reconstruction_error[i,3] = rre(Y,Y_hat)
         proportion_indeterminacy[i,3] = prop_ind(W)
+
+        # evaluate SUnSAL
+        unmixed_filename = joinpath("..","results","sunsal",string(exp_filenames[i], "-sunsal.tif"))
+        img = convert(Array{Float32},load(unmixed_filename))
+        N = size(img,3)
+        W = transpose(reshape(img,(P,N)))
+        Y_hat = S_anmf*W
+        reconstruction_error[i,4] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,4] = prop_ind(W)
+
+        # evaluate SUnSAL-TV
+        unmixed_filename = joinpath("..","results","sunsal-tv",string(exp_filenames[i], "-sunsal-tv.tif"))
+        img = convert(Array{Float32},load(unmixed_filename))
+        N = size(img,3)
+        W = transpose(reshape(img,(P,N)))
+        Y_hat = S_anmf*W
+        reconstruction_error[i,5] = rre(Y,Y_hat)
+        proportion_indeterminacy[i,5] = prop_ind(W)
+
     end
 
     writedlm(joinpath("..","results","reconstruction-error.csv"), reconstruction_error, ",")
@@ -89,14 +108,14 @@ function run()
 
     # evaluate endmember estimation
     S_true = readdlm(joinpath("..","data","ref","fluorometer-endmembers.csv"),',',Float32;header=true)[1]
-    S_anmf = readdlm(joinpath("..","results","anmf-estimated-endmembers.csv"), ',', Float32)
+    S_mean = readdlm(joinpath("..","results","mean-estimated-endmembers.csv"), ',', Float32)
 
     S_true = S_true[:,2:end]
-    S_nls = S_nls[:,2:end]
+    S_mean = S_mean[:,2:end]
     S_anmf = S_anmf[:,2:end]
 
     spectral_angle = zeros(Float32,(size(S_true,2),2))
-    spectral_angle[:,1] = sad(S_true,S_nls)
+    spectral_angle[:,1] = sad(S_true,S_mean)
     spectral_angle[:,2] = sad(S_true,S_anmf)
 
     writedlm(joinpath("..","results","spectral-angle.csv"), spectral_angle, ",")
