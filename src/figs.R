@@ -1,3 +1,4 @@
+library(RColorBrewer)
 library(ggplot2)
 library(ggthemes)
 library(reshape2)
@@ -59,6 +60,7 @@ plt.AF <- ggplot() +
                 ylab("Intensity") + labs(color="") +
                 theme_few()
 
+ggsave(file.path("..","results","autofluor.tiff"), plot=plt.AF, width=11, height=7, dpi=350)
 ggsave(file.path("..","results","autofluor.jpg"), plot=plt.AF, width=11, height=7, dpi=350)
 
 ##### Metrics Plots
@@ -70,6 +72,8 @@ colnames(RE) <- c("NLS","PoissonNMF","SSASU","SUnSAL","SUnSAL-TV")
 colnames(PI) <- c("NLS","PoissonNMF","SSASU","SUnSAL","SUnSAL-TV")
 RE$TestImage <- test.image.names
 PI$TestImage <- test.image.names
+RE <- RE[c(3,1,2,4,5,6)]
+PI <- PI[c(3,1,2,4,5,6)]
 
 RE <- melt(RE,  id.vars = 'TestImage', variable.name = 'Method')
 PI <- melt(PI,  id.vars = 'TestImage', variable.name = 'Method')
@@ -77,10 +81,13 @@ PI <- melt(PI,  id.vars = 'TestImage', variable.name = 'Method')
 plt.RE <- ggplot(data=RE, aes(x=TestImage, y=value, fill=Method)) +
                  geom_col(position="dodge", color="black") + ylim(0,0.15) +
                  ylab("Relative Reconstruction Error") + xlab("Test Image") + labs(fill="") +
-                 theme_few() + theme(legend.position="none")
+                 scale_fill_brewer(palette="Set2") + theme_few() + theme(legend.position="none")
 plt.PI <- ggplot(data=PI, aes(x=TestImage, y=value, fill=Method)) +
                  geom_col(position="dodge", color="black") + ylim(0,1) +
                  ylab("Proportion Indeterminacy") + xlab("Test Image") + labs(fill="") +
-                 theme_few() + theme(legend.position = 'bottom')
+                 scale_fill_brewer(palette="Set2") + theme_few() + theme(legend.position = 'bottom')
+
+ggsave(file.path("..","results","reconstruction-error.tiff"), plot=plt.RE, width=10, height=5, dpi=350)
 ggsave(file.path("..","results","reconstruction-error.jpg"), plot=plt.RE, width=10, height=5, dpi=350)
+ggsave(file.path("..","results","proportion-indeterminacy.tiff"), plot=plt.PI, width=10, height=6, dpi=350)
 ggsave(file.path("..","results","proportion-indeterminacy.jpg"), plot=plt.PI, width=10, height=6, dpi=350)
